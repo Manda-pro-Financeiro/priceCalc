@@ -15,18 +15,17 @@
         <div class="plano-indicacao">Ideal para o seu volume</div>
       </div>
       <div class="plano-recomendado">Recomendado</div>
-
       <div class="controle-transacoes">
         <div class="controle-titulo">
           <label for="transactionRange">Volume mensal de transações</label>
           <strong id="sliderValue" class="valor-transacao">50 transações/mês</strong>
         </div>
-        <input type="range" id="transactionRange" min="0" max="500" step="50" value="50">
-        <div class="marcadores-slider">
-          <span>0</span><span>100</span><span>200</span><span>300</span><span>400</span><span>500+</span>
+        <div class="slider-wrapper">
+          <input type="range" id="transactionRange" min="0" max="500" step="50" value="50">
+          <div class="slider-markers" id="sliderMarkers"></div>
         </div>
-      </div>
-
+        <div class="marcadores-slider" id="sliderLabels"></div>
+      </div>      
       <h4 class="titulo-servicos">Serviços adicionais</h4>
       <div class="servico">
         <span>Quantidade de contas bancárias<br><small>R$ 100/mês por conta</small></span>
@@ -34,7 +33,7 @@
       </div>
       <div class="servico">
         <span>Quantidade de CNPJs<br><small>R$ 250/mês por CNPJ</small></span>
-        <select id="cnpjsSelect"><option>1</option><option>3</option><option>5</option><option>6</option></select>
+        <select id="cnpjsSelect"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option></select>
       </div>
       <div class="servico">
         <span>Consultor dedicado<br><small>R$ 1200/mês</small></span>

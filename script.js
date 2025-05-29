@@ -6,6 +6,7 @@ const consultorToggle = document.getElementById("consultorToggle");
 const powerbiToggle = document.getElementById("powerbiToggle");
 const precoTotal = document.getElementById("precoTotal");
 const volumeInfo = document.getElementById("volumeInfo");
+const sliderLabels = document.getElementById("sliderLabels");
 
 function updateSliderBackground() {
   const value = Number(transactionRange.value);
@@ -13,6 +14,25 @@ function updateSliderBackground() {
   const max = Number(transactionRange.max);
   const percentage = ((value - min) / (max - min)) * 100;
   transactionRange.style.background = `linear-gradient(to right, #28c76f 0%, #28c76f ${percentage}%, #e0e0e0 ${percentage}%, #e0e0e0 100%)`;
+}
+
+function gerarNumerosSlider() {
+  sliderLabels.innerHTML = "";
+  const min = Number(transactionRange.min);
+  const max = Number(transactionRange.max);
+  const step = Number(transactionRange.step);
+
+  for (let i = min; i <= max; i += step) {
+    if (i % 100 === 0 || i === max) {
+      const label = document.createElement("span");
+      label.textContent = i === max ? "500+" : i;
+      const percentage = ((i - min) / (max - min)) * 100;
+      label.style.position = "absolute";
+      label.style.left = `${percentage}%`;
+      label.style.transform = "translateX(-50%)";
+      sliderLabels.appendChild(label);
+    }
+  }
 }
 
 function calcularTotal() {
@@ -43,3 +63,4 @@ powerbiToggle.addEventListener("change", calcularTotal);
 
 // Inicializa
 calcularTotal();
+gerarNumerosSlider();
