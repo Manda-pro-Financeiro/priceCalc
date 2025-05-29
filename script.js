@@ -6,7 +6,8 @@ const consultorToggle = document.getElementById("consultorToggle");
 const powerbiToggle = document.getElementById("powerbiToggle");
 const precoTotal = document.getElementById("precoTotal");
 const volumeInfo = document.getElementById("volumeInfo");
-const sliderLabels = document.getElementById("sliderLabels");
+const planoNome = document.getElementById("planoNome");
+const precoBase = document.getElementById("precoBase");
 
 function updateSliderBackground() {
   const value = Number(transactionRange.value);
@@ -17,6 +18,7 @@ function updateSliderBackground() {
 }
 
 function gerarNumerosSlider() {
+  const sliderLabels = document.getElementById("sliderLabels");
   sliderLabels.innerHTML = "";
   const min = Number(transactionRange.min);
   const max = Number(transactionRange.max);
@@ -42,16 +44,80 @@ function calcularTotal() {
   const consultor = consultorToggle.checked;
   const powerbi = powerbiToggle.checked;
 
-  let total = 297;
-  total += (contas - 1) * 100;
-  total += (cnpjs - 1) * 250;
-  if (consultor) total += 1200;
-  if (powerbi) total += 250;
+  let plano = "Essencial";
+  let precoBaseValor = 400;
+  let transacoesInclusas = 50;
+  let contasInclusas = 1;
+
+  if (transacoes > 200) {
+    plano = "Controle";
+    precoBaseValor = 950;
+    transacoesInclusas = 200;
+    contasInclusas = 2;
+  }
 
   sliderValue.textContent = `${transacoes} transações/mês`;
-  volumeInfo.textContent = `${transacoes} transações/mês`;
-  precoTotal.textContent = `R$ ${total}/mês`;
+  volumeInfo.textContent = `${transacoesInclusas} transações/mês`;
+  planoNome.textContent = plano;
+  precoBase.textContent = `R$ ${precoBaseValor}`;
 
+  let total = precoBaseValor;
+  const itensExtras = document.getElementById("itensExtras");
+  itensExtras.innerHTML = "";
+
+  // Cálculo de transações extras
+  const transacoesExtras = Math.max(0, transacoes - transacoesInclusas);
+  if (transacoesExtras > 0) {
+    const blocos = Math.ceil(transacoesExtras / 50);
+    const valorExtras = blocos * 200;
+    total += valorExtras;
+    const linhaExtras = document.createElement("div");
+    linhaExtras.className = "preco-linha";
+    linhaExtras.innerHTML = `<span>${transacoes} transações (${transacoesInclusas} inclusas)</span><span>R$ ${valorExtras}</span>`;
+    itensExtras.appendChild(linhaExtras);
+  }
+
+  // Contas adicionais
+  if (contas > contasInclusas) {
+    const extras = contas - contasInclusas;
+    const valor = extras * 100;
+    total += valor;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>${contas} contas bancárias (${contasInclusas} inclusas)</span><span>R$ ${valor}</span>`;
+    itensExtras.appendChild(linha);
+  }
+  
+  // CNPJs adicionais
+  if (cnpjs > 1) {
+    const extras = cnpjs - 1;
+    const valor = extras * 250;
+    total += valor;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>${cnpjs} CNPJs (1 incluso)</span><span>R$ ${valor}</span>`;
+    itensExtras.appendChild(linha);
+  }
+  
+  // Consultor dedicado
+  if (consultor) {
+    total += 1200;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>Consultor dedicado</span><span>R$ 1200</span>`;
+    itensExtras.appendChild(linha);
+  }
+  
+  // Integração Power BI
+  if (powerbi) {
+    total += 250;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>Integração com Power BI</span><span>R$ 250</span>`;
+    itensExtras.appendChild(linha);
+  }
+
+  precoTotal.textContent = `R$ ${total}/mês`;
   updateSliderBackground();
 }
 

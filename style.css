@@ -181,9 +181,26 @@ input[type="range"]::-ms-thumb {
 .preco-linha {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+.preco-linha span:last-child {
+  min-width: 80px;
+  text-align: right;
+}
+#itensExtras .preco-linha span:first-child::before {
+  content: '+ ';
+  color: #28c76f;
+  font-weight: bold;
 }
 .total {
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.total span:last-child {
+  font-size: 20px;
 }
 .incluido {
   color: #28c76f;

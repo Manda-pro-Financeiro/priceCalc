@@ -11,10 +11,9 @@
   <div class="container">
     <div class="card">
       <div class="recomendado-box">
-        <div class="plano-nome">Controle</div>
+        <div class="plano-nome" id="planoNome">Essencial</div>
         <div class="plano-indicacao">Ideal para o seu volume</div>
       </div>
-      <div class="plano-recomendado">Recomendado</div>
       <div class="controle-transacoes">
         <div class="controle-titulo">
           <label for="transactionRange">Volume mensal de transações</label>
@@ -48,17 +47,22 @@
     <div class="card">
       <h3>Seu plano personalizado</h3>
       <div class="preco-linha">
-        <span>Plano base (<span id="planoNome">Controle</span>)</span>
-        <strong id="precoBase">R$ 297</strong>
+        <span>Plano base (<span id="planoNome">Essencial</span>)</span>
+        <strong id="precoBase">R$ 400</strong>
       </div>
       <div class="preco-linha">
-        <span id="volumeInfo">50 transações/mês</span>
-        <span class="incluido">Incluído</span>
+        <span>Licença do software de gestão financeira</span>
+        <span class="incluido">Incluso</span>
       </div>
+      <div class="preco-linha" id="linhaVolumeIncluso">
+        <span id="volumeInfo">50 transações/mês</span>
+        <span class="incluido">Inclusas</span>
+      </div>
+      <div id="itensExtras"></div>
       <hr />
       <div class="preco-linha total">
-        <span>Preço total</span>
-        <span id="precoTotal">R$ 297/mês</span>
+        <span>Total</span>
+        <span id="precoTotal">R$ 400/mês</span>
       </div>
       <button>Contratar plano personalizado</button>
     </div>
