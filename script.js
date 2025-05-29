@@ -6,8 +6,17 @@ const consultorToggle = document.getElementById("consultorToggle");
 const powerbiToggle = document.getElementById("powerbiToggle");
 const precoTotal = document.getElementById("precoTotal");
 const volumeInfo = document.getElementById("volumeInfo");
+const planoNomeTopo = document.getElementById("planoNomeTopo");
 const planoNome = document.getElementById("planoNome");
 const precoBase = document.getElementById("precoBase");
+const volumeInfoLine = document.getElementById("volumeInfoLine");
+const volumeInfoLabel = document.getElementById("volumeInfoLabel");
+const contasInfoLine = document.getElementById("contasInfoLine");
+const contasInfoLabel = document.getElementById("contasInfoLabel");
+const contasInfoStatus = document.getElementById("contasInfoStatus");
+const cnpjsInfoLine = document.getElementById("cnpjsInfoLine");
+const cnpjsInfoLabel = document.getElementById("cnpjsInfoLabel");
+const cnpjsInfoStatus = document.getElementById("cnpjsInfoStatus");
 
 function updateSliderBackground() {
   const value = Number(transactionRange.value);
@@ -49,7 +58,7 @@ function calcularTotal() {
   let transacoesInclusas = 50;
   let contasInclusas = 1;
 
-  if (transacoes > 200) {
+  if (transacoes >= 200) {
     plano = "Controle";
     precoBaseValor = 950;
     transacoesInclusas = 200;
@@ -57,14 +66,57 @@ function calcularTotal() {
   }
 
   sliderValue.textContent = `${transacoes} transações/mês`;
-  volumeInfo.textContent = `${transacoesInclusas} transações/mês`;
+  volumeInfoLabel.textContent = `${transacoesInclusas} transações/mês`;
+  planoNomeTopo.textContent = plano;
   planoNome.textContent = plano;
   precoBase.textContent = `R$ ${precoBaseValor}`;
 
   let total = precoBaseValor;
   const itensExtras = document.getElementById("itensExtras");
   itensExtras.innerHTML = "";
+  // Transações
+  if (transacoes <= transacoesInclusas) {
+    volumeInfoLabel.textContent = `${transacoesInclusas} transações/mês`;
+    volumeInfoStatus.textContent = "Inclusa";
+    volumeInfoStatus.className = "incluido";
+  } else {
+    const blocos = Math.ceil((transacoes - transacoesInclusas) / 50);
+    const valorExtras = blocos * 200;
+    total += valorExtras;
+    volumeInfoLabel.textContent = `${transacoes} transações (${transacoesInclusas} inclusas)`;
+    volumeInfoStatus.textContent = `R$ ${valorExtras}`;
+    volumeInfoStatus.className = ""; // remove "incluido"
+  }
 
+  // Contas
+  if (contas <= contasInclusas) {
+    contasInfoLabel.textContent = `${contasInclusas} conta${contasInclusas > 1 ? 's' : ''} bancária${contasInclusas > 1 ? 's' : ''}`;
+    contasInfoStatus.textContent = "Inclusa";
+    contasInfoStatus.className = "incluido";
+  } else {
+    const extras = contas - contasInclusas;
+    const valor = extras * 100;
+    total += valor;
+    contasInfoLabel.textContent = `${contas} contas bancárias (${contasInclusas} inclusa${contasInclusas > 1 ? 's' : ''})`;
+    contasInfoStatus.textContent = `R$ ${valor}`;
+    contasInfoStatus.className = "";
+  }
+
+  // CNPJs
+  if (cnpjs <= 1) {
+    cnpjsInfoLabel.textContent = `1 CNPJ`;
+    cnpjsInfoStatus.textContent = "Incluso";
+    cnpjsInfoStatus.className = "incluido";
+  } else {
+    const extras = cnpjs - 1;
+    const valor = extras * 250;
+    total += valor;
+    cnpjsInfoLabel.textContent = `${cnpjs} CNPJs (1 incluso)`;
+    cnpjsInfoStatus.textContent = `R$ ${valor}`;
+    cnpjsInfoStatus.className = "";
+  }
+
+  /*
   // Cálculo de transações extras
   const transacoesExtras = Math.max(0, transacoes - transacoesInclusas);
   if (transacoesExtras > 0) {
@@ -76,6 +128,7 @@ function calcularTotal() {
     linhaExtras.innerHTML = `<span>${transacoes} transações (${transacoesInclusas} inclusas)</span><span>R$ ${valorExtras}</span>`;
     itensExtras.appendChild(linhaExtras);
   }
+
 
   // Contas adicionais
   if (contas > contasInclusas) {
@@ -98,7 +151,8 @@ function calcularTotal() {
     linha.innerHTML = `<span>${cnpjs} CNPJs (1 incluso)</span><span>R$ ${valor}</span>`;
     itensExtras.appendChild(linha);
   }
-  
+  */
+
   // Consultor dedicado
   if (consultor) {
     total += 1200;
