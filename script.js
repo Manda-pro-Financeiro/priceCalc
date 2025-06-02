@@ -116,43 +116,6 @@ function calcularTotal() {
     cnpjsInfoStatus.className = "";
   }
 
-  /*
-  // Cálculo de transações extras
-  const transacoesExtras = Math.max(0, transacoes - transacoesInclusas);
-  if (transacoesExtras > 0) {
-    const blocos = Math.ceil(transacoesExtras / 50);
-    const valorExtras = blocos * 200;
-    total += valorExtras;
-    const linhaExtras = document.createElement("div");
-    linhaExtras.className = "preco-linha";
-    linhaExtras.innerHTML = `<span>${transacoes} transações (${transacoesInclusas} inclusas)</span><span>R$ ${valorExtras}</span>`;
-    itensExtras.appendChild(linhaExtras);
-  }
-
-
-  // Contas adicionais
-  if (contas > contasInclusas) {
-    const extras = contas - contasInclusas;
-    const valor = extras * 100;
-    total += valor;
-    const linha = document.createElement("div");
-    linha.className = "preco-linha";
-    linha.innerHTML = `<span>${contas} contas bancárias (${contasInclusas} inclusas)</span><span>R$ ${valor}</span>`;
-    itensExtras.appendChild(linha);
-  }
-  
-  // CNPJs adicionais
-  if (cnpjs > 1) {
-    const extras = cnpjs - 1;
-    const valor = extras * 250;
-    total += valor;
-    const linha = document.createElement("div");
-    linha.className = "preco-linha";
-    linha.innerHTML = `<span>${cnpjs} CNPJs (1 incluso)</span><span>R$ ${valor}</span>`;
-    itensExtras.appendChild(linha);
-  }
-  */
-
   // Consultor dedicado
   if (consultor) {
     total += 1200;
@@ -184,3 +147,28 @@ powerbiToggle.addEventListener("change", calcularTotal);
 // Inicializa
 calcularTotal();
 gerarNumerosSlider();
+
+// Ação do botão
+const contratarBtn = document.getElementById("contratarBtn");
+if (contratarBtn) {
+  contratarBtn.addEventListener("click", () => {
+    const transacoes = transactionRange.value;
+    const contas = contasSelect.value;
+    const cnpjs = cnpjsSelect.value;
+    const consultor = consultorToggle.checked;
+    const powerbi = powerbiToggle.checked;
+    const plano = planoNome.textContent;
+    const total = precoTotal.textContent;
+
+    const texto = `Olá! Gostaria de mais informações sobre o plano ${plano} com as seguintes configurações:%0A` +
+                  `- ${transacoes} transações/mês%0A` +
+                  `- ${contas} conta(s) bancária(s)%0A` +
+                  `- ${cnpjs} CNPJ(s)%0A` +
+                  `- Consultor dedicado: ${consultor ? 'Sim' : 'Não'}%0A` +
+                  `- Integração com Power BI: ${powerbi ? 'Sim' : 'Não'}%0A` +
+                  `- Total estimado: ${total}%0A`;
+
+    const url = `https://api.whatsapp.com/send?phone=5527997481263&text=${texto}`;
+    window.open(url, '_blank');
+  });
+}

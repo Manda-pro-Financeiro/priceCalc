@@ -238,3 +238,27 @@ button {
   top: 0;
   transform: translateX(-50%);
 }
+
+#contratarBtn {
+  background: #28c76f;
+  color: white;
+  padding: 14px 28px;
+  border: none;
+  border-radius: 12px;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(40, 199, 111, 0.3);
+  transition: background 0.3s, transform 0.2s ease;
+}
+
+#contratarBtn:hover {
+  background: #22b664;
+  transform: scale(1.02);
+}
+
+#contratarBtn:active {
+  background: #1e9e58;
+  transform: scale(0.98);
+}
