@@ -20,6 +20,7 @@ const contasInfoStatus = document.getElementById("contasInfoStatus");
 const cnpjsInfoLine = document.getElementById("cnpjsInfoLine");
 const cnpjsInfoLabel = document.getElementById("cnpjsInfoLabel");
 const cnpjsInfoStatus = document.getElementById("cnpjsInfoStatus");
+const contabilidadePrecoLabel = document.getElementById("contabilidadePreco");
 
 function updateSliderBackground() {
   const value = Number(transactionRange.value);
@@ -56,7 +57,11 @@ function calcularTotal() {
   const consultor = consultorToggle.checked;
   const powerbi = powerbiToggle.checked;
   const contabilidade = contabilidadeToggle.checked;
-  const funcionarios = Number(funcionariosSelect.value);
+  const funcionariosLabel = funcionariosSelect.value;
+  const funcionarios = funcionariosLabel === '10+' ? 11 : Number(funcionariosLabel);
+
+  const excedeLimites = transacoes > 400 && funcionarios > 10;
+  contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 297';
 
   let plano = "Essencial";
   let precoBaseValor = 400;
@@ -83,11 +88,15 @@ function calcularTotal() {
   // Contabilidade
   if (contabilidade) {
     funcionariosDiv.style.display = "flex";
-    const valorCont = 297 + funcionarios * 35;
-    total += valorCont;
     const linha = document.createElement("div");
     linha.className = "preco-linha";
-    linha.innerHTML = `<span>Contabilidade (${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
+    if (excedeLimites) {
+      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>Consultar</span>`;
+    } else {
+      const valorCont = 297 + funcionarios * 35;
+      total += valorCont;
+      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
+    }
     itensExtras.appendChild(linha);
   } else {
     funcionariosDiv.style.display = "none";

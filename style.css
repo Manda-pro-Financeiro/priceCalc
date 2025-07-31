@@ -114,6 +114,16 @@ input[type="range"]::-ms-thumb {
   padding: 8px;
   border-radius: 8px;
 }
+.servico .info {
+  display: flex;
+  flex-direction: column;
+}
+.servico .funcionarios {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+}
 .servico select {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
@@ -267,4 +277,11 @@ button {
 #contratarBtn:active {
   background: #1e9e58;
   transform: scale(0.98);
+}
+
+.observacao {
+  font-size: 11px;
+  color: #555;
+  margin-top: 8px;
+  line-height: 1.2;
 }
