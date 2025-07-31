@@ -60,7 +60,7 @@ function calcularTotal() {
   const funcionarios = Number(funcionariosInput.value);
   const funcionariosLabel = funcionarios > 10 ? '10+' : funcionarios.toString();
 
-  const excedeLimites = transacoes > 400;
+  const excedeLimites = transacoes > 400 && funcionarios > 10;
   contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 297';
 
   let plano = "Essencial";
