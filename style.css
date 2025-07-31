@@ -114,6 +114,25 @@ input[type="range"]::-ms-thumb {
   padding: 8px;
   border-radius: 8px;
 }
+
+#contabilidadeServico {
+  flex-direction: column;
+  gap: 8px;
+}
+
+#contabilidadeServico .linha-servico {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nota-rodape {
+  font-size: 11px;
+  color: #666;
+  margin-top: 8px;
+  line-height: 1.3;
+}
+
 .servico select {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
