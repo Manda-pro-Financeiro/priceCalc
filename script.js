@@ -100,6 +100,17 @@ function calcularTotal() {
       linha.innerHTML = `<span>Contabilidade (${funcionariosTexto} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
     }
     itensExtras.appendChild(linha);
+  // Contabilidade
+  if (contabilidade) {
+    funcionariosDiv.style.display = "flex";
+    const valorCont = 297 + funcionarios * 35;
+    total += valorCont;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>Contabilidade (${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
+    itensExtras.appendChild(linha);
+  } else {
+    funcionariosDiv.style.display = "none";
   }
   // Transações
   if (transacoes <= transacoesInclusas) {
@@ -197,6 +208,7 @@ if (contratarBtn) {
                   `- ${contas} conta(s) bancária(s)%0A` +
                   `- ${cnpjs} CNPJ(s)%0A` +
                   `- Contabilidade: ${contabilidade ? funcionariosTexto + ' funcionário(s)' : 'Não'}%0A` +
+                  `- Contabilidade: ${contabilidade ? funcionarios + ' funcionário(s)' : 'Não'}%0A` +
                   `- Consultor dedicado: ${consultor ? 'Sim' : 'Não'}%0A` +
                   `- Integração com Power BI: ${powerbi ? 'Sim' : 'Não'}%0A` +
                   `- Total estimado: ${total}%0A`;
