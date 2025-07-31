@@ -115,6 +115,7 @@ input[type="range"]::-ms-thumb {
   border-left: 4px solid #ffc107;
   padding: 8px;
   border-radius: 8px;
+  align-items: flex-start;
 }
 .servico .info {
   display: flex;
@@ -126,6 +127,7 @@ input[type="range"]::-ms-thumb {
   align-items: center;
   gap: 8px;
   margin-top: 4px;
+  width: 100%;
 }
 .servico .funcionarios input[type="number"] {
   margin-left: auto;
