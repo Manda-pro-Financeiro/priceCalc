@@ -26,6 +26,18 @@
         <div class="marcadores-slider" id="sliderLabels"></div>
       </div>      
       <h4 class="titulo-servicos">Serviços adicionais</h4>
+      <div class="servico destaque" id="contabilidadeServico">
+        <div class="linha-servico">
+          <span>Contabilidade<br><small id="contabilidadePreco">a partir de R$ 297</small></span>
+          <label class="switch"><input type="checkbox" id="contabilidadeToggle"><span class="slider"></span></label>
+        </div>
+        <div class="linha-servico" id="funcionariosDiv" style="display:none;">
+          <span>Quantidade de funcionários<br><small>R$ 35/mês por funcionário</small></span>
+          <select id="funcionariosSelect">
+            <option value="0">0</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">10+</option>
+          </select>
+        </div>
+      </div>
       <div class="servico">
         <span>Quantidade de contas bancárias<br><small>R$ 100/mês por conta</small></span>
         <select id="contasSelect"><option>1</option><option>2</option><option>3</option><option>4</option><option>5</option><option>6</option><option>7</option><option>8</option></select>
@@ -73,6 +85,7 @@
         <span id="precoTotal">R$ 400/mês</span>
       </div>
       <button id="contratarBtn">Contratar plano personalizado</button>
+      <p class="nota-rodape">Preço válido apenas para empresas de serviço do Simples Nacional. Para empresas no lucro presumido, lucro real ou em atividades de comércio ou indústria, consulte um de nossos consultores.</p>
     </div>
   </div>
   <script src="script.js"></script>
