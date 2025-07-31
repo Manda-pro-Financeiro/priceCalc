@@ -108,6 +108,12 @@ input[type="range"]::-ms-thumb {
   align-items: center;
   margin-bottom: 16px;
 }
+.servico.destaque {
+  background-color: #fff8e6;
+  border-left: 4px solid #ffc107;
+  padding: 8px;
+  border-radius: 8px;
+}
 .servico select {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;

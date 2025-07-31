@@ -4,6 +4,9 @@ const contasSelect = document.getElementById("contasSelect");
 const cnpjsSelect = document.getElementById("cnpjsSelect");
 const consultorToggle = document.getElementById("consultorToggle");
 const powerbiToggle = document.getElementById("powerbiToggle");
+const contabilidadeToggle = document.getElementById("contabilidadeToggle");
+const funcionariosSelect = document.getElementById("funcionariosSelect");
+const funcionariosDiv = document.getElementById("funcionariosDiv");
 const precoTotal = document.getElementById("precoTotal");
 const volumeInfo = document.getElementById("volumeInfo");
 const planoNomeTopo = document.getElementById("planoNomeTopo");
@@ -52,6 +55,8 @@ function calcularTotal() {
   const cnpjs = Number(cnpjsSelect.value);
   const consultor = consultorToggle.checked;
   const powerbi = powerbiToggle.checked;
+  const contabilidade = contabilidadeToggle.checked;
+  const funcionarios = Number(funcionariosSelect.value);
 
   let plano = "Essencial";
   let precoBaseValor = 400;
@@ -74,6 +79,19 @@ function calcularTotal() {
   let total = precoBaseValor;
   const itensExtras = document.getElementById("itensExtras");
   itensExtras.innerHTML = "";
+
+  // Contabilidade
+  if (contabilidade) {
+    funcionariosDiv.style.display = "flex";
+    const valorCont = 297 + funcionarios * 35;
+    total += valorCont;
+    const linha = document.createElement("div");
+    linha.className = "preco-linha";
+    linha.innerHTML = `<span>Contabilidade (${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
+    itensExtras.appendChild(linha);
+  } else {
+    funcionariosDiv.style.display = "none";
+  }
   // Transações
   if (transacoes <= transacoesInclusas) {
     volumeInfoLabel.textContent = `${transacoesInclusas} transações/mês`;
@@ -143,6 +161,8 @@ contasSelect.addEventListener("change", calcularTotal);
 cnpjsSelect.addEventListener("change", calcularTotal);
 consultorToggle.addEventListener("change", calcularTotal);
 powerbiToggle.addEventListener("change", calcularTotal);
+contabilidadeToggle.addEventListener("change", calcularTotal);
+funcionariosSelect.addEventListener("change", calcularTotal);
 
 // Inicializa
 calcularTotal();
@@ -157,6 +177,8 @@ if (contratarBtn) {
     const cnpjs = cnpjsSelect.value;
     const consultor = consultorToggle.checked;
     const powerbi = powerbiToggle.checked;
+    const contabilidade = contabilidadeToggle.checked;
+    const funcionarios = funcionariosSelect.value;
     const plano = planoNome.textContent;
     const total = precoTotal.textContent;
 
@@ -164,6 +186,7 @@ if (contratarBtn) {
                   `- ${transacoes} transações/mês%0A` +
                   `- ${contas} conta(s) bancária(s)%0A` +
                   `- ${cnpjs} CNPJ(s)%0A` +
+                  `- Contabilidade: ${contabilidade ? funcionarios + ' funcionário(s)' : 'Não'}%0A` +
                   `- Consultor dedicado: ${consultor ? 'Sim' : 'Não'}%0A` +
                   `- Integração com Power BI: ${powerbi ? 'Sim' : 'Não'}%0A` +
                   `- Total estimado: ${total}%0A`;
