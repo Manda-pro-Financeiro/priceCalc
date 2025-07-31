@@ -5,7 +5,7 @@ const cnpjsSelect = document.getElementById("cnpjsSelect");
 const consultorToggle = document.getElementById("consultorToggle");
 const powerbiToggle = document.getElementById("powerbiToggle");
 const contabilidadeToggle = document.getElementById("contabilidadeToggle");
-const funcionariosSelect = document.getElementById("funcionariosSelect");
+const funcionariosInput = document.getElementById("funcionariosInput");
 const funcionariosDiv = document.getElementById("funcionariosDiv");
 const precoTotal = document.getElementById("precoTotal");
 const volumeInfo = document.getElementById("volumeInfo");
@@ -57,10 +57,10 @@ function calcularTotal() {
   const consultor = consultorToggle.checked;
   const powerbi = powerbiToggle.checked;
   const contabilidade = contabilidadeToggle.checked;
-  const funcionariosLabel = funcionariosSelect.value;
-  const funcionarios = funcionariosLabel === '10+' ? 11 : Number(funcionariosLabel);
+  const funcionarios = Number(funcionariosInput.value);
+  const funcionariosLabel = funcionarios > 10 ? '10+' : funcionarios.toString();
 
-  const excedeLimites = transacoes > 400 && funcionarios > 10;
+  const excedeLimites = transacoes > 400;
   contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 297';
 
   let plano = "Essencial";
@@ -91,11 +91,11 @@ function calcularTotal() {
     const linha = document.createElement("div");
     linha.className = "preco-linha";
     if (excedeLimites) {
-      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>Consultar</span>`;
+      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>Consultar</span>`;
     } else {
       const valorCont = 297 + funcionarios * 35;
       total += valorCont;
-      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})</span><span>R$ ${valorCont}</span>`;
+      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>R$ ${valorCont}</span>`;
     }
     itensExtras.appendChild(linha);
   } else {
@@ -171,7 +171,7 @@ cnpjsSelect.addEventListener("change", calcularTotal);
 consultorToggle.addEventListener("change", calcularTotal);
 powerbiToggle.addEventListener("change", calcularTotal);
 contabilidadeToggle.addEventListener("change", calcularTotal);
-funcionariosSelect.addEventListener("change", calcularTotal);
+funcionariosInput.addEventListener("input", calcularTotal);
 
 // Inicializa
 calcularTotal();
@@ -187,7 +187,7 @@ if (contratarBtn) {
     const consultor = consultorToggle.checked;
     const powerbi = powerbiToggle.checked;
     const contabilidade = contabilidadeToggle.checked;
-    const funcionarios = funcionariosSelect.value;
+    const funcionarios = funcionariosInput.value;
     const plano = planoNome.textContent;
     const total = precoTotal.textContent;
 
