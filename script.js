@@ -58,7 +58,6 @@ function calcularTotal() {
   const powerbi = powerbiToggle.checked;
   const contabilidade = contabilidadeToggle.checked;
   const funcionarios = Number(funcionariosInput.value);
-  const funcionariosLabel = funcionarios > 10 ? '10+' : funcionarios.toString();
 
   const excedeLimites = transacoes > 400 && funcionarios > 10;
   contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 297';
@@ -91,11 +90,11 @@ function calcularTotal() {
     const linha = document.createElement("div");
     linha.className = "preco-linha";
     if (excedeLimites) {
-      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>Consultar</span>`;
+      linha.innerHTML = `<span>Contabilidade (+${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>Consultar</span>`;
     } else {
       const valorCont = 297 + funcionarios * 35;
       total += valorCont;
-      linha.innerHTML = `<span>Contabilidade (${funcionariosLabel} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>R$ ${valorCont}</span>`;
+      linha.innerHTML = `<span>Contabilidade (+${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>R$ ${valorCont}</span>`;
     }
     itensExtras.appendChild(linha);
   } else {
