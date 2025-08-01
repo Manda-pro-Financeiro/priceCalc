@@ -110,9 +110,9 @@ input[type="range"]::-ms-thumb {
   gap: 8px;
   margin-bottom: 16px;
 }
-.servico.destaque {
-  background-color: #fff8e6;
-  border-left: 4px solid #ffc107;
+.servico.contabilidade {
+  background-color: #fffdf5;
+  border-left: 2px solid #ffdda9;
   padding: 8px;
   border-radius: 8px;
   align-items: flex-start;
