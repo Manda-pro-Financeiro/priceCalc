@@ -28,13 +28,13 @@
       <h4 class="titulo-servicos">Serviços adicionais</h4>
       <div class="servico contabilidade" id="contabilidadeServico">
         <div class="info">
-          <span>Contabilidade<sup>1</sup><br><small id="contabilidadePreco">a partir de R$ 297</small></span>
-          <div id="funcionariosDiv" class="funcionarios" style="display:none;">
-            <span>Número de funcionários<br><small>R$ 35 por funcionário</small></span>
-            <input id="funcionariosInput" type="number" min="0" value="0" />
-          </div>
+          <span>Contabilidade<br><small id="contabilidadePreco">a partir de R$ 297</small></span>
         </div>
         <label class="switch"><input type="checkbox" id="contabilidadeToggle"><span class="slider"></span></label>
+      </div>
+      <div id="funcionariosDiv" class="servico" style="display:none;">
+        <span>Número de funcionários<br><small>R$ 35 por funcionário</small></span>
+        <input id="funcionariosInput" type="number" min="0" value="0" />
       </div>
       <hr class="servico-separator" />
       <div class="servico">
@@ -54,7 +54,6 @@
         <label class="switch"><input type="checkbox" id="powerbiToggle"><span class="slider"></span></label>
       </div>
     </div>
-
     <div class="card">
       <h3>Seu plano personalizado</h3>
       <div class="preco-linha">
@@ -84,6 +83,7 @@
         <span id="precoTotal">R$ 400/mês</span>
       </div>
       <button id="contratarBtn">Contratar plano personalizado</button>
+      <br>
       <p class="observacao"><sup>1</sup> Preço válido apenas para empresas de serviço do Simples Nacional. Para empresas nos regimes de Lucro Presumido, Lucro Real ou em atividades de comércio ou indústria, consultar um dos nossos consultores.</p>
       </div>
     </div>

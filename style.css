@@ -141,7 +141,7 @@ input[type="range"]::-ms-thumb {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
   height: 32px;
-  min-width: 52px;
+  min-width: 56px;
   padding: 4px 12px 4px 10px;
   border: 1px solid #ddd;
   border-radius: 20px;
@@ -170,12 +170,14 @@ input[type="range"]::-ms-thumb {
   font-family: 'Poppins', sans-serif;
   font-size: 13px;
   height: 32px;
-  min-width: 52px;
+  width: 56px;
   padding: 4px 12px 4px 10px;
+  padding-right: 6px;
   border: 1px solid #ddd;
   border-radius: 20px;
   background-color: #f9f9f9;
   transition: border 0.2s ease, background-color 0.2s ease;
+  box-sizing: border-box;
 }
 .servico input[type="number"]:hover {
   border-color: #bbb;

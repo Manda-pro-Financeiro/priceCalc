@@ -89,17 +89,24 @@ function calcularTotal() {
     funcionariosDiv.style.display = "flex";
     const linha = document.createElement("div");
     linha.className = "preco-linha";
+
+    const funcionariosLabel = funcionarios === 0
+      ? '(sem funcionários)'
+      : `(+${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})`;
+
     if (excedeLimites) {
-      linha.innerHTML = `<span>Contabilidade (+${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>Consultar</span>`;
+      linha.innerHTML = `<span>Contabilidade ${funcionariosLabel}<sup>1</sup></span><span>Consultar</span>`;
     } else {
       const valorCont = 297 + funcionarios * 35;
       total += valorCont;
-      linha.innerHTML = `<span>Contabilidade (+${funcionarios} funcionário${funcionarios !== 1 ? 's' : ''})<sup>1</sup></span><span>R$ ${valorCont}</span>`;
+      linha.innerHTML = `<span>Contabilidade ${funcionariosLabel}<sup>1</sup></span><span>R$ ${valorCont}</span>`;
     }
+
     itensExtras.appendChild(linha);
   } else {
     funcionariosDiv.style.display = "none";
   }
+
   // Transações
   if (transacoes <= transacoesInclusas) {
     volumeInfoLabel.textContent = `${transacoesInclusas} transações/mês`;
