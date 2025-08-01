@@ -332,3 +332,16 @@ button {
   border-top: 1px solid #eee;
   margin: 12px 0;
 }
+
+@media (max-width: 480px) {
+  .recomendado-box {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .plano-nome {
+    align-self: stretch;
+    text-align: center;
+    width: 100%;
+  }
+}
