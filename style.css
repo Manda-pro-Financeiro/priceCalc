@@ -171,11 +171,10 @@ input[type="range"]::-ms-thumb {
   font-size: 13px;
   height: 32px;
   width: 70px;
-  padding: 4px 10px;
+  padding: 4px 12px 4px 10px;
   border: 1px solid #ddd;
   border-radius: 20px;
   background-color: #f9f9f9;
-  text-align: right;
   transition: border 0.2s ease, background-color 0.2s ease;
 }
 .servico input[type="number"]:hover {
@@ -324,4 +323,10 @@ button {
   color: #555;
   margin-top: auto;
   line-height: 1.2;
+}
+
+.servico-separator {
+  border: none;
+  border-top: 1px solid #eee;
+  margin: 12px 0;
 }
