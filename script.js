@@ -60,7 +60,7 @@ function calcularTotal() {
   const funcionarios = Number(funcionariosInput.value);
 
   const excedeLimites = transacoes > 400 && funcionarios > 10;
-  contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 397';
+  contabilidadePrecoLabel.textContent = excedeLimites ? 'Consultar' : 'a partir de R$ 497';
 
   let plano = "Essencial";
   let precoBaseValor = 400;
@@ -97,7 +97,7 @@ function calcularTotal() {
     if (excedeLimites) {
       linha.innerHTML = `<span>Contabilidade ${funcionariosLabel}<sup>1</sup></span><span>Consultar</span>`;
     } else {
-      const valorCont = 397 + funcionarios * 40;
+      const valorCont = 497 + funcionarios * 40;
       total += valorCont;
       linha.innerHTML = `<span>Contabilidade ${funcionariosLabel}<sup>1</sup></span><span>R$ ${valorCont}</span>`;
     }
